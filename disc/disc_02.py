@@ -1,75 +1,150 @@
-# Here's how i implement the swipe function
+# not complete
+def make_keeper(n): 
+    
+    def f(cond):
+        i = 1
+        while(i <= n):
+                if(cond(i)):
+                     print(i)
+                i += 1
+    return f
 
-# def split(n):
-#     return n // 10, n % 10
+def cond(x):
+     if(x % 2 == 0):
+          return True
+     return False
+            
+def find_digit(k):
+    assert k > 0 ,' k must be equal or greater than zero'
+    def find(x):
+         return x // 10**(k - 1) % 10
+    return find
 
-# def order_print(n):
-#     if (n < 10):
-#         print(n)
-#     else:
-#         all_but_last,last = split(n)
-#         print(last)
-#         order_print(all_but_last)
+def digits_account(k):
+     count = 0
+     while(k != 0):
+          count += 1
+          k //= 10
+     return count
 
-# def r_order_print(n):
-#     if(n < 10):
-#         print(n)
-#     else:
-#         all_but_last,last = split(n)
-#         r_order_print(all_but_last)
-#         print(last)
+def match_maker(k):
+     assert k > 0 , 'k must be equal or greater than zero'
+     def find(x):
+          digits_num = digits_account(x)
+          digit = 1
+          while(digit <= k):
+               i = digit
+               get_digit = find_digit(digit)  
+               curr = get_digit(x)
+               while(i <= digits_num):
+                    if(find_digit(i)(x) != curr):
+                         return False
+                    i += k
+               digit += 1
+          return True
+     return find
 
-# def swipe(n):
-#     order_print(n)
-#     count = 0
-#     tmp = n
-#     while(tmp > 10):
-#         count += 1
-#         tmp //= 10
-#     r_order_print(n % 10**count)
+ # 实现match_maker更简单的方法
+def match_k(k):
+     def check(x):
+         while x // (10 ** k) > 0:
+             if (x % 10) != (x // (10 ** k)) % 10:
+                 return False
+             x //= 10
+         return True
+     return check
+
+
+
+              
+                    
+                    
+
+          
 
 
 
 
-# Here's how to implement swipe function according to the standard answer
-def swipe(n):
-    if(n < 10):
-        print(n)
-    else:
-        print(n % 10)
-        swipe(n // 10)
-        print(n % 10)
 
-def skip_fac(n):
-    if(n <= 2):
-        return n
-    else:
-        return n * skip_fac(n - 2)
 
-def hailstone(n):
-    """Print out the hailstone sequence starting at n,
-    and return the number of elements in the sequence.
 
-    >>> a = hailstone(10)
-    10
-    5
-    16
-    8
-    4
-    2
-    1
-    >>> a
-    7
-    >>> b = hailstone(1)
-    1
-    >>> b
-    1
-    """
-    print(n)
-    if(n == 1):
-        return 1
-    elif(n % 2 == 0):
-        return 1 + hailstone(n // 2)
-    elif(n % 2 != 0):
-        return 1 + hailstone(3 * n + 1)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+    
+        
