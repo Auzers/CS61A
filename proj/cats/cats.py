@@ -161,7 +161,7 @@ def autocorrect(typed_word, word_list, diff_function, limit):
            min_diff = min(diff)
            index = diff.index(min_diff)
     return diff_practical[index]
-    # OR this solution
+    # OR
     if(typed_word in word_list):
         return typed_word
     else:
