@@ -194,7 +194,16 @@ def feline_fixes(typed, source, limit):
     5
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
+    def test(a,b,sum):
+        if(sum > limit):
+            return float('inf')
+        elif(not a or not b):
+            return abs(len(a) - len(b))
+        elif(a[0] == b[0]):
+            return test(a[1:], b[1:], sum)
+        else:
+            return test(a[1:], b[1:], sum + 1) + 1
+    return test(typed,source,0)        
     # END PROBLEM 6
 
 
@@ -218,22 +227,24 @@ def minimum_mewtations(typed, source, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    assert False, 'Remove this line'
-    if ___________: # Base cases should go here, you may add more base cases as needed.
+    if (typed == source):
         # BEGIN
-        "*** YOUR CODE HERE ***"
+        return 0 
         # END
     # Recursive cases should go below here
-    if ___________: # Feel free to remove or add additional cases
+    if limit < 0: # Feel free to remove or add additional cases
         # BEGIN
-        "*** YOUR CODE HERE ***"
+        return float('inf')
         # END
+    elif(not typed or not source):
+        return max(len(typed), len(source))
     else:
-        add = ... # Fill in these lines
-        remove = ...
-        substitute = ...
-        # BEGIN
-        "*** YOUR CODE HERE ***"
+        # BEGIN 
+        diff = typed[0] != source[0]
+        add = 1 + minimum_mewtations(typed, source[1:], limit - 1)# Fill in these lines
+        remove = 1 + minimum_mewtations(typed[1:], source,limit - 1)
+        substitute = diff + minimum_mewtations(typed[1:], source[1:], limit - diff)
+        return min(add,remove,substitute)
         # END
 
 
@@ -274,7 +285,16 @@ def report_progress(typed, source, user_id, upload):
     0.2
     """
     # BEGIN PROBLEM 8
-    "*** YOUR CODE HERE ***"
+    total = len(source)
+    count = 0
+    for i in range(0, len(typed)):
+        if(typed[i] == source[i]):
+            count += 1
+        else:
+            break
+    Progress = count / total
+    upload({'id': user_id,'progress': Progress})
+    return Progress
     # END PROBLEM 8
 
 
@@ -296,7 +316,22 @@ def time_per_word(words, timestamps_per_player):
     [[6, 3, 6, 2], [10, 6, 1, 2]]
     """
     # BEGIN PROBLEM 9
-    "*** YOUR CODE HERE ***"
+    p = timestamps_per_player
+    res_p = []
+    for time_list in p:
+        time = [[time_list[i + 1] - time_list[i] for i in range(0,len(time_list) - 1)]]
+        res_p  += time
+    return match(words,res_p)
+    # OR
+    p = timestamps_per_player
+    a = len(p)
+    b = len(p[0])
+    tmp = [[0]* (b - 1) for _ in range(0, a)] # only need b - 1 datas to calulate time diffence
+    for i in range(0,a):
+        for j in range(0,b - 1):
+            tmp[i][j] = p[i][j + 1] - p[i][j]
+    return match(words,tmp)
+
     # END PROBLEM 9
 
 
@@ -318,7 +353,19 @@ def fastest_words(match):
     player_indices = range(len(get_all_times(match)))  # contains an *index* for each player
     word_indices = range(len(get_all_words(match)))    # contains an *index* for each word
     # BEGIN PROBLEM 10
-    "*** YOUR CODE HERE ***"
+    word = get_all_words(match)
+    times = get_all_times(match)
+    tmp = [[] for _ in player_indices] # 初始化二维数组
+    for j in word_indices:
+        index = 0
+        for i in range(0,len(times)):
+            if(times[i][j] < times[index][j]):
+                index = i
+        tmp[index] += [word[j]]
+    return tmp
+        
+
+
     # END PROBLEM 10
 
 
