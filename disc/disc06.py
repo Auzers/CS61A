@@ -41,7 +41,4 @@ def partition_gen(n, m):
     if(m > 1):
         yield from partition_gen(n, m - 1)  
         
-        
-def test(x):
-    print(x)
     
