@@ -29,9 +29,9 @@ def buy(required_fruits, prices, total_amount):
             print(cart)
         elif fruits and amount > 0:
             fruit = fruits[0]
-            price = ____
-            for k in ____:
-                add(____, ____, ____)
+            price = prices[fruit]
+            for k in range(1, amount // price + 1):
+                add(fruits[1:], amount - k * price, cart + display(fruit,k))
     add(required_fruits, total_amount, '')
 
 
@@ -63,7 +63,10 @@ def distance(city_a, city_b):
     >>> distance(city_c, city_d)
     5.0
     """
-    "*** YOUR CODE HERE ***"
+    x1, x2 = get_lat(city_a), get_lat(city_b)
+    y1, y2 = get_lon(city_a), get_lon(city_b)
+    return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
+    
 
 def closer_city(lat, lon, city_a, city_b):
     """
@@ -80,8 +83,15 @@ def closer_city(lat, lon, city_a, city_b):
     >>> closer_city(41.29, 174.78, bucharest, vienna)
     'Bucharest'
     """
-    "*** YOUR CODE HERE ***"
-
+    city_c = make_city('city_c',lat,lon)
+    distance_a = distance(city_c, city_a)
+    distance_b = distance(city_c, city_b)
+    if(distance_a < distance_b):
+        return get_name(city_a)
+    else:
+        return get_name(city_b)
+    
+    
 def check_city_abstraction():
     """
     There's nothing for you to do for this function, it's just here for the extra doctest
