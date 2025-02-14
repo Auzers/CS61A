@@ -102,14 +102,13 @@ def duplicate_link(s, val):
     Link(1, Link(2, Link(2, Link(2, Link(2, Link(3))))))
     """
     if(s == Link.empty):
-        return s
+        return 
     elif(s.first == val):
         remain = s.rest
         s.rest = Link(val, remain)
         duplicate_link(remain, val)
-        
     else:
-        duplicate_link(s.rest,val)
+        duplicate_link(s.rest, val)
 
 
 class Link:
